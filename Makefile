@@ -29,6 +29,10 @@ bin/test: test.o $(OBJS)
 	@mkdir -p bin
 	$(CC) $^ -o $@
 
+bin/my_test: my_test.o $(OBJS)
+	@mkdir -p bin
+	$(CC) $^ -o $@
+
 bin/benchmark: benchmark.o $(OBJS)
 	@mkdir -p bin
 	$(CC) $^ -o $@
@@ -40,6 +44,9 @@ clean:
 	rm -fr bin build *.o src/*.o
 
 test: bin/test
+	@./$<
+
+my_test: bin/my_test
 	@./$<
 
 benchmark: bin/benchmark

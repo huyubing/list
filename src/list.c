@@ -9,6 +9,7 @@
 
 /*
  * Allocate a new list_t. NULL on failure.
+ * 创建一个ＬＩＳＴ
  */
 
 list_t *
@@ -18,9 +19,9 @@ list_new() {
     return NULL;
   self->head = NULL;
   self->tail = NULL;
-  self->free = NULL;
+  self->free = NULL;  /* free fun pointer */
   self->match = NULL;
-  self->len = 0;
+  self->len = 0;  /* length is zero */
   return self;
 }
 
@@ -54,10 +55,10 @@ list_rpush(list_t *self, list_node_t *node) {
   if (!node) return NULL;
 
   if (self->len) {
-    node->prev = self->tail;
-    node->next = NULL;
-    self->tail->next = node;
-    self->tail = node;
+    node->prev = self->tail;  /* 当前的node的前一个是原来的最后一个 */
+    node->next = NULL;  /* next is NULL */
+    self->tail->next = node; /* 原来的最后一个下一个是当前 */
+    self->tail = node; 
   } else {
     self->head = self->tail = node;
     node->prev = node->next = NULL;
